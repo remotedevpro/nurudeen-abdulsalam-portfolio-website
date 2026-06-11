@@ -1,0 +1,366 @@
+/* Contact.css - original styles preserved; added animation/toast/honeypot/shake rules */
+
+/* ---------------------------
+   Base: your original styles
+   --------------------------- */
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  margin: 80px 170px;
+}
+
+.contact-title {
+  position: relative;
+}
+
+.contact-title h1 {
+  font-size: 80px;
+  font-weight: 600;
+  padding: 0px 30px;
+}
+
+.contact-title img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.contact-section {
+  display: flex;
+  gap: 150px;
+}
+
+.contact-left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.contact-left h1 {
+  font-size: 80px;
+  font-weight: 700;
+  background: linear-gradient(270deg, #DF8908 80%, #B415FF 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-left p {
+  max-width: 550px;
+  line-height: 35px;
+  font-size: 20px;
+  color: #D8D8D8;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: 22px;
+  color: #D8D8D8;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 30px;
+}
+
+.contact-right label {
+  font-size: 22px;
+  font-weight: 500;
+  color: #D8D8D8;
+}
+
+.contact-right input {
+  width: 600px;
+  height: 58px;
+  padding-left: 20px;
+  border-radius: 4px;
+  background: #32323c;
+  font-size: 20px;
+  color: #FFFFFF;
+  font-family: Outfit, sans-serif;
+}
+
+.contact-right textarea {
+  width: 600px;
+  padding: 25px;
+  border-radius: 4px;
+  background: #32323c;
+  font-size: 20px;
+  color: #FFFFFF;
+  font-family: Outfit, sans-serif;
+}
+
+.contact-submit {
+  border: none;
+  color: #FFFFFF;
+  border-radius: 50px;
+  background: linear-gradient(264deg, #DF8908 -5.09%, #B415FF 106.28%);
+  font-size: 22px;
+  padding: 20px 60px;
+  margin-bottom: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-submit:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+/* Inline status messages */
+.contact-status.success {
+  color: #2ecc71;
+  font-weight: 600;
+}
+
+.contact-status.error {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* ---------------------------
+   Floating success animation (added)
+   --------------------------- */
+
+/* container for the floating checkmark */
+.success-anim {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #2ecc71; /* green */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  transform: translateY(20px) scale(0.9) rotate(-8deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 320ms cubic-bezier(.22,.8,.34,1);
+  z-index: 2000;
+}
+
+/* when .show class is added, animate into view */
+.success-anim.show {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0);
+  transition: opacity 120ms ease, transform 420ms cubic-bezier(.22,.8,.34,1);
+}
+
+/* svg checkmark animation */
+.success-anim .check {
+  width: 40px;
+  height: 40px;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: draw 0.45s forwards ease-in-out;
+}
+
+/* draw stroke */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* small fade-out after a few seconds */
+.success-anim.show {
+  animation: vanish 2.1s forwards;
+}
+
+@keyframes vanish {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.98);
+  }
+}
+
+/* ---------------------------
+   Toast / snackbar (added)
+   --------------------------- */
+
+.contact-toast {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  min-width: 260px;
+  max-width: calc(100% - 48px);
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(46, 204, 113, 0.95); /* green by default */
+  color: white;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 220ms ease, transform 320ms cubic-bezier(.22,.8,.34,1);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.contact-toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-toast.error {
+  background: rgba(231, 76, 60, 0.95);
+}
+
+.contact-toast .toast-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-toast .toast-content strong {
+  margin-bottom: 4px;
+}
+
+.contact-toast .toast-message {
+  font-weight: 400;
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+/* close button for toast */
+.toast-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  line-height: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.toast-close:focus {
+  outline: 3px solid rgba(255,255,255,0.18);
+  outline-offset: 2px;
+}
+
+/* ---------------------------
+   Form shake animation (added)
+   --------------------------- */
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.contact-right.shake {
+  animation: shake 0.65s ease;
+  border: 1px solid rgba(231,76,60,0.9);
+  box-shadow: 0 8px 22px rgba(231,76,60,0.09);
+}
+
+/* ---------------------------
+   Honeypot field (added)
+   --------------------------- */
+
+.honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@media(max-width:768px) {
+  .contact{
+    gap: 50px;
+    margin: 50px 70px;
+    align-items: start;
+
+  }
+  .contact-title h1{
+    padding: 0;
+    font-size: 50px;
+    font-weight: 600;
+    
+  }
+  .contact-title img{
+    width: 130px;
+    margin-right: -20px;
+  }
+  .contact-section{
+    flex-direction: column;
+  }
+  .contact-left h1{
+    font-size: 54px;
+
+  }
+  .contact-left p{
+    font-size: 18px;
+  }
+  .contact-detail{
+    gap: 20px;
+  }
+  .contact-detail img{
+    width: 25px;
+
+  }
+  .contact-right label{
+    font-size: 20px;
+  }
+  .contact-right input{
+    width: 100%;
+    font-size: 20px;
+  }
+  .contact-right textarea{
+    width: 95%;
+    font-size: 20px;
+  }
+  .contact-submit{
+    font-size: 20px;
+    padding: 15px 40px;
+  }
+
+}

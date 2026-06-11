@@ -1,0 +1,13 @@
+*{
+  margin: 0;
+  padding: 0;
+
+}
+
+body{
+  height: 100dvh;
+ /** background: #161513; **/
+  background-color: color-mix(in srgb, green 15%, black 85%); /* Equal blend of green and blue */
+  color: white;
+  font-family: 'Outfit', sans-serif;
+}

@@ -1,0 +1,145 @@
+/**
+.w_img {
+    height: 350px;  
+    width: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+**/
+.mywork {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    justify-content: center;
+    margin: 80px 170px;    
+}
+
+.mywork-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    
+}
+
+.work-item {
+    position: relative;
+    display: inline-block;
+}
+
+.mywork-title {
+    position: relative;
+}
+    
+.mywork-title h1 {
+    font-size: 80px;
+    font-weight: 600;
+    padding: 0px 30px;
+}
+.mywork-title img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.mywork-container img {
+    cursor: pointer;
+    transition: 0.3s;
+    box-sizing: border-box;
+    width: 350px;
+    height: 280px;
+    
+}
+
+.work-name {
+  position: absolute;
+  top: 10px;            /* adjust position */
+  left: 10px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background: rgba(207, 102, 4, 0.97); /* dark background */
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin: 10px;
+}
+.work-name:hover{
+    transform: scale(1.10);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 4px solid #FF00FF;
+    border-radius: 10px;
+    transition: 0.3s;
+    max-width: 80%;
+
+}
+
+
+
+
+.mywork-container img:hover {
+    transform: scale(1.10);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 4px solid #FF00FF;
+    border-radius: 10px;
+    transition: 0.3s;
+    
+}
+
+.mywork-showmore {
+    display: flex;
+    gap: 15px;
+    padding: 30px 60px;
+    /*background: linear-gradient(267deg, #DA7C25 0.36%, #B923E1 102.06%);*/    color: white;
+    /*border: 2px solid white;*/
+    /*border-radius: 50px;*/
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 80px;
+    transition: 0.6s all ease-in-out;
+    cursor: pointer;
+}
+
+.mywork-showmore:hover {
+    gap: 30px;
+    opacity: 0.8;
+    transform: scale(1.05);
+    transition: 0.6s all ease-in-out;
+}
+
+
+@media(max-width:768px) {
+    .mywork{
+        gap: 50px;
+        margin: 50px 70px;
+        align-items: start;
+    }
+    .mywork-title h1{
+        padding: 0;
+        font-size: 50px;
+        font-weight: 600;
+    }
+    .mywork-title img{
+        width: 130px;
+        margin-right: -20px;
+    }
+    .mywork-container{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    .mywork-container img{
+        width: 100%;
+        height: 100%;
+    }
+    .work-name{
+        font-size: 1rem;
+    } 
+    .mywork-showmore{
+        padding: 20px 40px;
+        font-size: 18px;
+        margin: 50px auto;
+        cursor: pointer;
+    }
+}
